@@ -1,4 +1,4 @@
-import java.io.*;
+	import java.io.*;
 /**
  * Purpose: demonstrate simple Java Fraction class with command line,
  * jdb debugging, and Ant build file.
@@ -15,6 +15,10 @@ public class Fraction {
 
    public Fraction(){
       numerator = denominator = 0;
+   }
+   public Fraction(int n1, int n2){
+	   numerator = n1;
+	   denominator = n2;
    }
 
    public void print() {
@@ -38,10 +42,30 @@ public class Fraction {
    }
 
    public static void main (String args[]) {
-      try {
          // create a new instance
          // Fraction *frac = [[Fraction alloc] init];
-         Fraction frac = new Fraction();
+		if (args.length == 2) {
+			int argX = 0;
+			int argY = 0;
+        try {
+          argX = Integer.parseInt(args[0]);
+          argY = Integer.parseInt(args[1]);
+        } catch (Exception e) {
+          System.out.println("Arguments: " + args[0] + ", " + args[1] + " must be integers.");
+          System.exit(1);
+        }
+		Fraction frac = new Fraction();
+		// set the values
+         frac.setNumerator(argX);
+         frac.setDenominator(argY);
+
+         // print it
+         System.out.print("The fraction is: ");
+         frac.print();
+         System.out.println("");
+        
+      } else {
+		  Fraction frac = new Fraction();
 
          // set the values
          frac.setNumerator(1);
@@ -51,9 +75,6 @@ public class Fraction {
          System.out.print("The fraction is: ");
          frac.print();
          System.out.println("");
-
-      }catch(Exception e) {
-         e.printStackTrace();
       }
    }
 }
